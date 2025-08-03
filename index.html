@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +49,7 @@
   <input type="number" id="numberInput" placeholder="Enter number (0–36)" min="0" max="36" />
   <button onclick="addNumber()">Add</button>
   <button onclick="showStats()">Show Stats</button>
+  <button onclick="clearResults()">Clear All</button>
   <pre id="output"></pre>
 
   <script>
@@ -80,9 +80,10 @@
       const odd = numbers.length - even;
       const redCount = numbers.filter(n => red.includes(n)).length;
       const blackCount = numbers.filter(n => black.includes(n)).length;
+      const last10 = numbers.slice(-10).join(", ");
 
-      document.getElementById("output").innerText = `Total: ${numbers.length}\nEven: ${even} | Odd: ${odd}\nRed: ${redCount} | Black: ${blackCount}\n\nHot Numbers:\n${hot}\n\nCold Numbers:\n${cold}`;
-    }
-  </script>
-</body>
-</html>
+      const hotNums = entries.slice(0,3).map(e => e[0]);
+      const streakEven = even > odd ? 'Odd' : 'Even';
+      const streakColor = redCount > blackCount ? 'Black' : 'Red';
+
+      const prediction = `Try betting on: ${hotNums.join(", 
